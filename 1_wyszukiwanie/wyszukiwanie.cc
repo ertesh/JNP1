@@ -1,3 +1,6 @@
+// Maciej Andrejczuk
+// Task 1 - Wyszukiwanie
+
 #include <iostream>
 #include <algorithm>
 #include <vector>
@@ -17,7 +20,8 @@ typedef pair<pair<VD, VS>, int> Line;
 
 // Reads input line by line into given `vector<string>`.
 // Ignores blank lines.
-void read_input(vector<string> &lines) {
+void read_input(vector<string> &lines) 
+{
     string line;
     while (getline(cin, line)) {
         if (line.empty()) continue;
@@ -37,7 +41,7 @@ double representation(double w)
 }
 
 // Checks if `word` is a valid `double`.
-// If so the value is saved in `value`.
+// Additionally result of conversion is saved in `value`.
 bool is_number(string &word, double &value)
 {
     istringstream iss(word);
@@ -54,6 +58,7 @@ template <class T> void sort_and_unique(vector<T> &v) {
 void prepare(const vector<string> &lines, vector<Line> &data)
 {
     int n = lines.size();
+    data.reserve(lines.size());
     for (int i = 0; i < n; i++) {
         vector<double> numbers;
         vector<string> non_numbers;
@@ -87,16 +92,18 @@ void write_output(const vector<string> &lines, const vector<Line> &v)
 {
     int n = v.size();
     int k = 0;
+    bool first = false;
     while (k < n) {
         // A group will contain elements [k,l)
         int l = k + 1;
         while (l < n && v[l].first == v[k].first) {
            l++;
         }
-        if (l > k + 1) {  // If group has more than 1 element 
+        if (l > k + 1) {  // If group has more than 1 element
+            if (!first) first = true;
+            else cout << endl;
             for (int i = k; i < l; i++)
-              cout << lines[v[i].second] << endl;  
-            cout << endl;
+              cout << lines[v[i].second] << endl;
         }
         k = l;
     }
