@@ -1,5 +1,5 @@
 CXX = g++
-TARGET = maptel.o
+TARGET = quatseq.o
 
 ifndef debuglevel
     debuglevel=0

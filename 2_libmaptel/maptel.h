@@ -1,9 +1,8 @@
 // Maciej Andrejczuk
 // Task 2 - Libmaptel
 
-#ifndef _MAPTEL_
-#define _MAPTEL_
-
+#ifndef _MAPTEL_H_
+#define _MAPTEL_H_
 
 #ifdef __cplusplus
     #include <cstring> 
