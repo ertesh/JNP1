@@ -15,24 +15,24 @@ using namespace std;
 #endif
 
 // Representation of a single dictionary
-typedef map<string, string> Dict; 
+typedef map<string, string> Dict;
 
 // Representation of all dictionaries
-typedef map<unsigned long, Dict> DictMap; 
+typedef map<unsigned long, Dict> DictMap;
 
 
-class Debug 
+class Debug
 {
     public:
     static const int VERBOSE_DEBUGLEVEL = 2;
-    
-    template <class T> 
+
+    template <class T>
     Debug& operator<< (const T& message) {
-        if (debuglevel >= VERBOSE_DEBUGLEVEL) 
+        if (debuglevel >= VERBOSE_DEBUGLEVEL)
             cerr << message;
         return *this;
     }
-    
+
     Debug& operator<< (ostream& (*fun)(ostream&)) {
         if (debuglevel >= VERBOSE_DEBUGLEVEL)
             cerr << fun;
@@ -40,7 +40,7 @@ class Debug
     }
 };
 
-static Debug& debug() 
+static Debug& debug()
 {
     static Debug db;
     if (debuglevel >= Debug::VERBOSE_DEBUGLEVEL)
@@ -49,18 +49,18 @@ static Debug& debug()
 }
 
 // Accessor to all dictionaries
-static DictMap& dmap() 
+static DictMap& dmap()
 {
     static DictMap dict_map;
     return dict_map;
 }
 
-static inline bool valid_dict_id(unsigned long id) 
+static inline bool valid_dict_id(unsigned long id)
 {
     return (dmap().find(id) != dmap().end());
 }
 
-static bool valid_number(const char *tel) 
+static bool valid_number(const char *tel)
 {
     if (tel == NULL) return false;
     int n = strlen(tel);
@@ -70,7 +70,7 @@ static bool valid_number(const char *tel)
     return true;
 }
 
-static inline bool move(Dict::iterator &it, Dict &dict) 
+static inline bool move(Dict::iterator &it, Dict &dict)
 {
     assert(it != dict.end());
     it = dict.find(it->second);
@@ -100,7 +100,7 @@ void maptel_delete(unsigned long id)
 
 void maptel_insert(unsigned long id, const char *tel_src, const char *tel_dst)
 {
-    debug() << "maptel_insert(" << id << ", " << tel_src << ", " << tel_dst 
+    debug() << "maptel_insert(" << id << ", " << tel_src << ", " << tel_dst
             << ")" << endl;
     assert(valid_dict_id(id));
     assert(valid_number(tel_src));
@@ -124,16 +124,16 @@ void maptel_erase(unsigned long id, const char *tel_src)
     }
 }
 
-void maptel_transform(unsigned long id, const char *tel_src, char *tel_dst, 
+void maptel_transform(unsigned long id, const char *tel_src, char *tel_dst,
                       size_t len)
 {
-    debug() << "maptel_transform(" << id << ", " << tel_src << ", " 
+    debug() << "maptel_transform(" << id << ", " << tel_src << ", "
             << (void*) tel_dst << ", " << len << ")" << endl;
     assert(valid_dict_id(id));
     assert(valid_number(tel_src));
     assert(tel_dst != NULL);
     const char *ans = tel_src;
-    if (dmap()[id].find(string(tel_src)) != dmap()[id].end()) 
+    if (dmap()[id].find(string(tel_src)) != dmap()[id].end())
         ans = dmap()[id][tel_src].c_str();
     assert(strlen(ans) < len);
     strcpy(tel_dst, ans);
@@ -164,7 +164,7 @@ int maptel_is_cyclic(unsigned long id, const char *tel_src)
 void maptel_transform_ex(unsigned long id, const char *tel_src, char *tel_dst,
                          size_t len)
 {
-    debug() << "maptel_transform_ex(" << id << ", " << tel_src << ", " 
+    debug() << "maptel_transform_ex(" << id << ", " << tel_src << ", "
             << (void*) tel_dst << ", " << len << ")" << endl;
     assert(valid_dict_id(id));
     assert(valid_number(tel_src));
@@ -175,7 +175,7 @@ void maptel_transform_ex(unsigned long id, const char *tel_src, char *tel_dst,
     while (it != dmap()[id].end()) {
         ans = it->second.c_str();
         if (!move(it, dmap()[id])) break;
-    } 
+    }
     assert(strlen(ans) < len);
     strcpy(tel_dst, ans);
     debug() << "maptel_transform_ex: " << tel_src << " -> " << tel_dst << endl;

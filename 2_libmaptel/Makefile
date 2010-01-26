@@ -18,7 +18,7 @@ endif
 
 %.o: %.cc %.h
 	$(CXX) $(CXXFLAGS) -c $< -o $@
-    
+
 all: clean $(TARGET)
 
 clean:

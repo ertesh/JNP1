@@ -20,7 +20,7 @@ typedef pair<pair<VD, VS>, int> Line;
 
 // Reads input line by line into given `vector<string>`.
 // Ignores blank lines.
-void read_input(vector<string> &lines) 
+void read_input(vector<string> &lines)
 {
     string line;
     while (getline(cin, line)) {
@@ -51,7 +51,7 @@ bool is_number(string &word, double &value)
 
 template <class T> void sort_and_unique(vector<T> &v) {
     sort(v.begin(), v.end());
-    v.erase(unique(v.begin(), v.end()), v.end());    
+    v.erase(unique(v.begin(), v.end()), v.end());
 }
 
 // Prepares each line by computing its representation as a `Line`.
@@ -86,9 +86,9 @@ void prepare(const vector<string> &lines, vector<Line> &data)
 }
 
 // Writes out all equivalence classes separeted by empty line
-// Two lines are from the same equivalence class 
+// Two lines are from the same equivalence class
 // if and only if they have the same representations.
-void write_output(const vector<string> &lines, const vector<Line> &v) 
+void write_output(const vector<string> &lines, const vector<Line> &v)
 {
     int n = v.size();
     int k = 0;
@@ -113,7 +113,7 @@ int main()
 {
     vector<string> lines;  // raw input divided into lines
     vector<Line> data;  // full representation of each line
-    
+
     read_input(lines);
     prepare(lines, data);
     write_output(lines, data);

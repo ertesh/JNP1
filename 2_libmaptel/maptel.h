@@ -5,7 +5,7 @@
 #define _MAPTEL_H_
 
 #ifdef __cplusplus
-    #include <cstring> 
+    #include <cstring>
     extern "C" {
 #else
     #include <string.h>
@@ -17,7 +17,7 @@ unsigned long maptel_create();
 // Removes a dictionary with given `id`.
 void maptel_delete(unsigned long id);
 
-// Inserts to the dictionary `id` an edge from `tel_src` to `tel_dst`. 
+// Inserts to the dictionary `id` an edge from `tel_src` to `tel_dst`.
 // If any edge from `id` existed, it is erased.
 void maptel_insert(unsigned long id, const char *tel_src, const char *tel_dst);
 
@@ -25,10 +25,10 @@ void maptel_insert(unsigned long id, const char *tel_src, const char *tel_dst);
 // If no such edge exists, nothing happens
 void maptel_erase(unsigned long id, const char *tel_src);
 
-// If in the dictionary `id` an edge from `tel_src` exists, 
-// `tel_dst` becomes a destination of this edge, 
+// If in the dictionary `id` an edge from `tel_src` exists,
+// `tel_dst` becomes a destination of this edge,
 // otherwise `tel_dst` becomes `tel_src`.
-void maptel_transform(unsigned long id, const char *tel_src, char *tel_dst, 
+void maptel_transform(unsigned long id, const char *tel_src, char *tel_dst,
                       size_t len);
 
 // Checks if in the dictionary `id` a cycle containing `tel_src` exists.
