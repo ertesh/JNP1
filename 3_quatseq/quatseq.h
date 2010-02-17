@@ -19,11 +19,19 @@ class Quaternion
         // Returns forth coordinate of quaternion
         double k() const;
         
-        Quaternion& operator= (const Quaternion&);
+        const Quaternion& operator= (const Quaternion&);
         Quaternion& operator- ();
         Quaternion& operator+= (const Quaternion&);
-    //    Quaternion& 
+        Quaternion& operator-= (const Quaternion&);
+        Quaternion& operator*= (const Quaternion&);
 };
+
+Quaternion operator+ (const Quaternion&, const Quaternion&);
+Quaternion operator- (const Quaternion&, const Quaternion&);
+Quaternion operator* (const Quaternion&, const Quaternion&);
+
+bool operator== (const Quaternion&, const Quaternion&);
+bool operator!= (const Quaternion&, const Quaternion&);
 
 // Returns quaternion equal to real part of given quaternion
 Quaternion re(const Quaternion&);
@@ -39,14 +47,4 @@ double norm(const Quaternion&);
 
 
 #endif
-//       q2 = q1; - przypisuje kwaternion q1 na zmienną q2;
-//      -q; - zwraca kwaternion przeciwny do kwaternionu q;
-//     q1 + q2; - zwraca kwaternion będący sumą kwaternionów q1 i q2;
-//    q1 += q2; - dodaje do kwaternionu q1 kwaternion q2;
-//   q1 - q2; - zwraca kwaternion będący różnicą kwaternionów q1 i q2;
-//  q1 -= q2; - odejmuje od kwaternionu q1 kwaternion q2;
-// q1 * q2; - zwraca kwaternion będący iloczynem kwaternionów q1 i q2;
-//q1 *= q2; - mnoży kwaternion q1 przez kwaternion q2;
-//q1 == q2; - zwraca true wtw. gdy kwaterniony q1 i q2 są równe;
-//q1 != q2; - zwraca true wtw. gdy kwaterniony q1 i q2 są różne;
 
